@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 export default function Friend({ image, name, balance }) {
   return (
     <li>
@@ -15,7 +17,7 @@ export default function Friend({ image, name, balance }) {
       ) : (
         <p>You and {name} are even</p>
       )}
-      <button className='button'>Select</button>
+      <Button>Select</Button>
     </li>
   );
 }
