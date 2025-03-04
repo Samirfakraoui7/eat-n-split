@@ -1,5 +1,9 @@
 import "./index.css";
 
-export default function Button({ children }) {
-  return <button className='button'>{children}</button>;
+export default function Button({ onClick, children }) {
+  return (
+    <button onClick={onClick} className='button'>
+      {children}
+    </button>
+  );
 }
