@@ -40,7 +40,9 @@ function App() {
     handleShowAddFriendButton();
   }
   function handleSelectedFriend(friend) {
-    setSelectedFriend(friend);
+    setSelectedFriend((curSelected) =>
+      curSelected?.id === friend?.id ? null : friend
+    );
   }
 
   return (
@@ -53,13 +55,13 @@ function App() {
         />
 
         {showAddFriend && <FormAddFriend onAddFriend={handleShowAddFriend} />}
-       
+
         <Button onClick={handleShowAddFriendButton}>
           {showAddFriend ? "close" : " Add Friend"}
         </Button>
       </div>
 
-      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend}/>}
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
     </div>
   );
 }
