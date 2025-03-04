@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Button from "./Button";
 
-export default function FormAddFriend({ friends, setFriends }) {
+export default function FormAddFriend({ onAddFriend }) {
   const [newFriendName, setNewFriendName] = useState("");
-  const [newFriendBalance, setNewFriendBalnce] = useState("");
-  const [newFriendImage, setNewFriendImage] = useState("");
+  const [newFriendBalance, setNewFriendBalnce] = useState(0);
+  const [newFriendImage, setNewFriendImage] = useState(
+    "https://i.pravatar.cc/48"
+  );
 
   function handleFriendBalanceInput(e) {
     const { value } = e.target;
@@ -22,18 +24,20 @@ export default function FormAddFriend({ friends, setFriends }) {
   function handleAddFriend(e) {
     e.preventDefault();
 
+    const id = crypto.randomUUID();
+
     const friendItem = {
-      id: Date.now(),
+      id: id,
       name: newFriendName,
-      image: `https://i.pravatar.cc/48?u=${newFriendImage}`,
+      image: `${newFriendImage}?=${id}`,
       balance: newFriendBalance,
     };
     if (!newFriendName) alert("please fill in the new friend name");
     else if (!newFriendBalance) alert("please fill in the new friend balance");
     else if (!newFriendImage) alert("please fill in the new friend image id");
-    else setFriends((friends) => [...friends, friendItem]);
+    else onAddFriend((friends) => [...friends, friendItem]);
     setNewFriendName("");
-    setNewFriendBalnce("");
+    setNewFriendBalnce(0);
     setNewFriendImage("");
   }
 
